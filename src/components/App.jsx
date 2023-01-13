@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 
 import Box from './Box/Box';
@@ -30,11 +30,11 @@ export const App = () => {
     setFilter(e.currentTarget.value);
   };
 
-  const visibleNamesMethod = () => {
+  const visibleNamesMethod = useMemo(() => {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
-  };
+  }, [contacts, filter]);
 
   const deleteContact = contactId => {
     setContacts(prevState =>
@@ -46,7 +46,7 @@ export const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const visibleNames = visibleNamesMethod();
+  const visibleNames = visibleNamesMethod;
 
   return (
     <Box
