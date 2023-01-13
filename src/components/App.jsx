@@ -22,7 +22,6 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   const onSubmitForm = data => {
-    // console.log(data.name);
     data.id = nanoid();
     setContacts(prev => [...prev, data]);
   };
